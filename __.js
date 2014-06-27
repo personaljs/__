@@ -1,16 +1,30 @@
+var localestrings = {
+	'ru' : {
+		'user' : '[мужчина|женщина]',
+		'create' : 'создал[|а]',
+		'post' : 'запис(ь|и|ей)'
+	},
+	'en' : {
+		'user' : '[men|women]',
+		'create' : 'create',
+		'post' : 'post(|s)'
+	}
+};
+
 function locale (obj) {
 	var lang = 'ru';
 	var gender = 0;
-	function replace (text, num) {
-		text = text.replace(/\[(.*)\]/gi, function(m,value){
+	function replace (val, num) {
+		var text = obj[lang][val];
+		if(text) text = text.replace(/\[(.*)\]/gi, function(m,value){
 			var arr = value.split('|');
 			return arr[gender] || '';
 		});
-		text = text.replace(/\((.*)\)/gi, function(m,value){
+		if(text && num) text = text.replace(/\((.*)\)/gi, function(m,value){
 			var arr = value.split('|');
 			return arr[num] || '';
 		});
-		return text;
+		return text || val;
 	}
 	function getNumber (num) {
 		if(lang === 'en' && num > 1) return 1;
@@ -24,7 +38,7 @@ function locale (obj) {
 		}
 	}
 	function out (val, num) {
-		return replace(obj[lang][val], getNumber(num));
+		return replace(val, getNumber(num));
 	}
 	out.lang = function (val) {
 		lang = val;
@@ -34,4 +48,4 @@ function locale (obj) {
 	}
 	return out;
 };
-var __ = locale(locale);
+var __ = locale(localestrings);
