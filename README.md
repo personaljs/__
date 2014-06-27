@@ -4,15 +4,15 @@ js-шаблонизатор
 
 Обьект с локализацией вида:
     var locale = {
-    	'ru' : {
-    		'user' : '[мужчина|женщина]',
-    		'create' : 'создал[|а]',
-    		'post' : 'запис(ь|и|ей)'
-    	},
-    	'en' : {
-    		'user' : '[men|women]',
-    		'create' : 'create',
-    		'post' : 'post(|s)'
+      'ru' : {
+         'user' : '[мужчина|женщина]',
+         'create' : 'создал[|а]',
+         'post' : 'запис(ь|и|ей)'
+      },
+      'en' : {
+         'user' : '[men|women]',
+         'create' : 'create',
+         'post' : 'post(|s)'
     	}
     };
 
