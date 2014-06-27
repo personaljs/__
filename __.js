@@ -49,3 +49,5 @@ function locale (obj) {
 	return out;
 };
 var __ = locale(localestrings);
+
+console.log(__('user') + __('create') + __('post', 50) )
