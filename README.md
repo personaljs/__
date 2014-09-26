@@ -1,25 +1,16 @@
-js-шаблонизатор 
+Require.js-модуль для локализации приложений, как и на Backbone.js, так и без него.
 
-Использование:
+Установка:
 
-Обьект с локализацией вида:
+    require.config({
+      ....
+      paths: {
+        backbone: 'lib/exoskeleton',
+        ....
+        __: 'lib/__',
 
-    var locale = {
-      'ru' : {
-         'user' : '[мужчина|женщина]',
-         'create' : 'создал[|а]',
-         'post' : 'запис(ь|и|ей)'
-      },
-      'en' : {
-         'user' : '[men|women]',
-         'create' : 'create',
-         'post' : 'post(|s)'
-    	}
-    };
-
-Вывод в тексте:
-
-    __('user') + __('create') + __('post', 1);
+        ....
+      }
 
 
 
