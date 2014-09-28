@@ -1,3 +1,13 @@
+/**
+ * @__.js
+ *
+ * @author Ivan Dolgov
+ * @link http://github.com/onmoon/__
+ *
+ * @copyright Ivan Dolgov, 2014
+ * @license MIT: You are free to use and modify this code for any use, on the condition that this copyright notice remains.
+ */
+
 (function () {
 	// Invoke strict mode
 	"use strict";
@@ -36,9 +46,7 @@
 		this.req = objs.req;
 		this.name = objs.name;
 		this.dictionary = {};
-		/*
-		* Set defaults values for gender 
-		*/
+
 		this.setDefaults = function (config) {
 			this.gender = {
 				man   : config.gender.men,
@@ -46,11 +54,7 @@
 			};
 			this.lang = config.lang || 'root';
 		}
-		/*
-		 * записываем в словарь набор слов
-		 * locale - обьект со словами, lang - язык словаря
-		 * если не передан язык то думаем что это подгрузочный файл с root и флагами языков
-		*/
+		
 		this.setDictionary = function (locale, lang) {
 			if(lang) this.dictionary[lang] = locale;
 			else this.dictionary = locale;
@@ -67,21 +71,25 @@
 			}
 			this.counter = pluralTypes[family || 'russian'];
 		}
+		
 		this.replaceCount = function (word, count) {
 			return word.replace(/\({2}([^\)]+)\){2}/gi, function(m,value){
 				var arr = value.split('|');
 				return arr[count] || '';
 			});
 		}
+		
 		this.checkGender = function (gender) {
 			return this.gender.man === gender ? 0 : 1;
 		}
+		
 		this.replaceGender = function (word, gender) {
 			return word.replace(/\[{2}([^\]]+)\]{2}/gi, function(m,value){
 				var arr = value.split('|');
 				return arr[gender] || '';
 			});
 		}
+		
 		this.replaceActions = function (word, actions) {
 			return word.replace(/\{{2}([^\}]+)\}{2}/gi, function(m,value){
 				return actions[value] || '';
@@ -92,6 +100,7 @@
 			this.out.get = this.dictionary[ this.dictionary.hasOwnProperty(lang) ? lang : 'root' ];
 			this.setCounter(lang);
 		}
+		
 		this.setLang = function (code) {
 			var code = code;
 
@@ -112,6 +121,7 @@
 				this.setPhrases(code);
 			}
 		}
+		
 		this.out = (function (word, count, gender, actions) {
 			var word = this.dictionary[this.lang][word];
 				word = this.replaceCount(word, this.counter(count))
@@ -119,7 +129,9 @@
 				word = this.replaceActions(word, actions);
 			return word;
 		}).bind(this);
+		
 		this.out.get = {};
+		
 		this.out.setLang = this.setLang.bind(this);
 	}
 
