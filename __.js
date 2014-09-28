@@ -42,10 +42,9 @@
 		icelandic	: ['is']
 	};
 
-	var __ = function (objs) {
+	var Locale = function (objs) {
 		this.req = objs.req;
 		this.name = objs.name;
-		this.dictionary = {};
 
 		this.setDefaults = function (config) {
 			this.gender = {
@@ -53,12 +52,12 @@
 				woman : config.gender.women
 			};
 			this.lang = config.lang || 'root';
-		}
+		};
 		
 		this.setDictionary = function (locale, lang) {
 			if(lang) this.dictionary[lang] = locale;
 			else this.dictionary = locale;
-		}
+		};
 
 		this.setCounter = function () {
 			var type, l, langs, family;
@@ -70,40 +69,40 @@
 				}
 			}
 			this.counter = pluralTypes[family || 'russian'];
-		}
+		};
 		
 		this.replaceCount = function (word, count) {
 			return word.replace(/\({2}([^\)]+)\){2}/gi, function(m,value){
 				var arr = value.split('|');
 				return arr[count] || '';
 			});
-		}
+		};
 		
 		this.checkGender = function (gender) {
 			return this.gender.man === gender ? 0 : 1;
-		}
+		};
 		
 		this.replaceGender = function (word, gender) {
 			return word.replace(/\[{2}([^\]]+)\]{2}/gi, function(m,value){
 				var arr = value.split('|');
 				return arr[gender] || '';
 			});
-		}
+		};
 		
 		this.replaceActions = function (word, actions) {
 			return word.replace(/\{{2}([^\}]+)\}{2}/gi, function(m,value){
 				return actions[value] || '';
 			});
-		} 
+		};
 
 		this.setPhrases = function (lang) {
-			this.lang =this.dictionary.hasOwnProperty(lang) ? lang : 'root';
+			this.dictionary = this.dictionary || {};
+			this.lang = this.dictionary.hasOwnProperty(lang) ? lang : 'root';
 			this.out.get = this.dictionary[this.lang];
 			this.setCounter();
-		}
+		};
 		
 		this.setLang = function (code, callback) {
-			var code = code;
 
 			var match = nlsRegExp.exec(this.name),
 					prefix = match[1],
@@ -123,20 +122,20 @@
 				this.setPhrases(code);
 				if(callback) callback.apply(this);
 			}
-		}
+		};
 		
 		this.out = (function (word, count, gender, actions) {
-			var word = this.dictionary[this.lang][word];
-				word = this.replaceCount(word, this.counter(count))
-				word = this.replaceGender(word, this.checkGender(gender))
-				word = this.replaceActions(word, actions);
+			word = this.dictionary[this.lang][word];
+			word = this.replaceCount(word, this.counter(count));
+			word = this.replaceGender(word, this.checkGender(gender));
+			word = this.replaceActions(word, actions);
 			return word;
 		}).bind(this);
 		
 		this.out.get = {};
 		
 		this.out.setLang = this.setLang.bind(this);
-	}
+	};
 
 	define(['module'], function (module) {
 		return {
@@ -145,17 +144,18 @@
 			*/
 			load: function (name, req, onLoad, config) {
 
-				var Locale = new __({
+				var locale = new Locale({
 					name : name,
 					req  : req
 				});
 
 				config = config && config.__ || defaults;
-				Locale.setDefaults(config);
+				locale.setDefaults(config);
 
-				Locale.out.setLang();
-				onLoad(Locale.out);
+				locale.out.setLang(null , function(){
+					onLoad(locale.out);
+				});
 			}
-		}
+		};
 	});
 })();
