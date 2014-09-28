@@ -60,11 +60,11 @@
 			else this.dictionary = locale;
 		}
 
-		this.setCounter = function (lang) {
+		this.setCounter = function () {
 			var type, l, langs, family;
 			for (type in mapping) {
 				if (mapping.hasOwnProperty(type)) {
-					if (mapping[type].indexOf(lang) !== -1) {
+					if (mapping[type].indexOf(this.lang) !== -1) {
 						family = type;
 					} 
 				}
@@ -97,11 +97,12 @@
 		} 
 
 		this.setPhrases = function (lang) {
-			this.out.get = this.dictionary[ this.dictionary.hasOwnProperty(lang) ? lang : 'root' ];
-			this.setCounter(lang);
+			this.lang =this.dictionary.hasOwnProperty(lang) ? lang : 'root';
+			this.out.get = this.dictionary[this.lang];
+			this.setCounter();
 		}
 		
-		this.setLang = function (code) {
+		this.setLang = function (code, callback) {
 			var code = code;
 
 			var match = nlsRegExp.exec(this.name),
@@ -113,12 +114,14 @@
 			var path = match[1] + lang + match[4] + match[5];
 
 			if(!code || this.dictionary.hasOwnProperty(code)) {
-				this.req([path], (function (code, locale) {
+				this.req([path], (function (code, callback, locale) {
 					this.setDictionary( locale, code );
 					this.setPhrases(code);
-				}).bind(this, code));
+					if(callback) callback.apply(this);
+				}).bind(this, code, callback));
 			} else {
 				this.setPhrases(code);
+				if(callback) callback.apply(this);
 			}
 		}
 		
