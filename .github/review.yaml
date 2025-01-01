@@ -2,7 +2,7 @@ labeled: true
 groups:
   - name: reviewers
     members:
-      - jsus
+      - personaljs
 rules:
   - reviewersCount: 1
     groups:
