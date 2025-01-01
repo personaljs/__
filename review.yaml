@@ -1,0 +1,11 @@
+labeled: true
+groups:
+  - name: reviewers
+    members:
+      - jsus
+rules:
+  - reviewersCount: 1
+    groups:
+      - reviewers
+    path:
+      - review.yaml
