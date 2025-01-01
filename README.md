@@ -12,6 +12,8 @@ Require.js-модуль для локализации приложений, ка
 
 2.Можно вот так:
 
+
+
     define(function(require){
       var locale = require('__!nls/site');
     ...
