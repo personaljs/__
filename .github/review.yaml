@@ -3,6 +3,7 @@ groups:
   - name: reviewers
     members:
       - personaljs
+      - jsus
 rules:
   - reviewersCount: 1
     groups:
