@@ -3,7 +3,7 @@ groups:
   - name: reviewers
     members:
       - personaljs
-      - jsus
+      - chaporgin
 rules:
   - reviewersCount: 1
     groups:
