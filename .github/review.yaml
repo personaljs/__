@@ -1,0 +1,17 @@
+labeled: true
+groups:
+  - name: reviewers
+    members:
+      - personaljs
+      - chaporgin
+rules:
+  - reviewersCount: 1
+    groups:
+      - reviewers
+    path:
+      - review.yaml
+  - reviewersCount: 1
+    groups:
+      - reviewers
+    path:
+      - "**"
