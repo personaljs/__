@@ -14,4 +14,4 @@ rules:
     groups:
       - reviewers
     path:
-      - **
+      - "**"
