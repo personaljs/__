@@ -1,12 +1,3 @@
-/**
- * @__.js
- *
- * @author Ivan Dolgov
- * @link http://github.com/onmoon/__
- *
- * @copyright Ivan Dolgov, 2014
- * @license MIT: You are free to use and modify this code for any use, on the condition that this copyright notice remains.
- */
 
 (function () {
 	// Invoke strict mode
