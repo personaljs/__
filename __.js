@@ -19,7 +19,6 @@
 		}
 	};
 	var nlsRegExp = /(^.*(^|\/)nls(\/|$))([^\/]*)\/?([^\/]*)/;
-
 	// Mapping from pluralization group plural logic.
 	var pluralTypes = {
 		chinese		: function(n) { return 0; },
