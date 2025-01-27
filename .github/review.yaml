@@ -5,12 +5,14 @@ groups:
       - personaljs
       - chaporgin
 rules:
-  - reviewersCount: 1
+  - approves: 1
+    reviewers: 1
     groups:
       - reviewers
     path:
       - review.yaml
-  - reviewersCount: 1
+  - approves: 1
+    reviewers: 1
     groups:
       - reviewers
     path:
