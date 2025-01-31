@@ -4,11 +4,15 @@ groups:
     members:
       - personaljs
       - chaporgin
+  - name: owners
+    members:
+      - personaljs
+      - chaporgin
 rules:
   - approves: 1
     reviewers: 1
     groups:
-      - reviewers
+      - owners
     path:
       - review.yaml
   - approves: 1
