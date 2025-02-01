@@ -5,7 +5,6 @@ Require.js localization module for js applications, also supports apps developed
 Connection is no different from a standard module i18n Require.js.
 
 1.Use this way:
-
     define(['__!nls/site'], function(locale) {
     ....
     });
