@@ -10,7 +10,7 @@ groups:
       - chaporgin
 rules:
   - approves: 1
-    reviewers: 1
+    reviewers: 2
     groups:
       - owners
     path:
