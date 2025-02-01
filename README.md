@@ -6,7 +6,7 @@ Require.js-модуль для локализации приложений, ка
 
 1.Можно так:
 
-    define(['__!nls/site'], function(locale) {
+    define(['__!nls/site'], function(locvale) {
     ....
     });
 
